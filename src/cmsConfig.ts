@@ -5,9 +5,13 @@ interface ListItem {
   name: string;
 }
 
+interface Colors {
+  bgColor: string;
+}
+
 export interface TestFormValues {
-  bgColor: string,
-  list: ListItem[],
+  colors: Colors;
+  list: ListItem[];
 }
 
 
@@ -16,10 +20,18 @@ export const CMS_CONFIG: FormOptions<TestFormValues> = {
   label: 'Editor',
   fields: [
     {
-      label: "Background Color",
+      label: "Colors",
       name: "bgColor",
-      type: "string",
-      component: "color",
+      type: "object",
+      component: "group",
+      fields: [
+        {
+          label: "Background Color",
+          name: "bgColor",
+          type: "string",
+          component: "color",
+        }
+      ]
     },
     {
       label: "List",
@@ -51,7 +63,9 @@ export const CMS_CONFIG: FormOptions<TestFormValues> = {
     console.log('form', form);
   },
   loadInitialValues: () => Promise.resolve({
-    bgColor: "#FF0000",
+    colors: {
+      bgColor: "#FF0000"
+    },
     list: Array.from(new Array(100)).map((_, i) => ({
       id: String(i),
       name: `Item ${i}`,

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useCMS, useForm, usePlugin, TinaCMS } from 'tinacms';
+import React, { useEffect } from 'react';
+import { useForm, usePlugin } from 'tinacms';
 import { TinaEditProvider, useEditState } from 'tinacms/dist/edit-state';
 import './App.css'
 import { CMS_CONFIG, TestFormValues } from './cmsConfig';
@@ -20,11 +20,11 @@ function App() {
     <div className="App">
       <TinaEditProvider showEditButton editMode={
         <div className="content">
-          <div className="color" style={{ backgroundColor: formData.bgColor }}>
-            {formData.bgColor}
+          <div className="color" style={{ backgroundColor: formData.colors?.bgColor }}>
+            {formData.colors?.bgColor}
           </div>
           <ul className="list">
-            {formData.list.map(({ id, name }) => (
+            {formData.list?.map?.(({ id, name }) => (
               <li key={id}>{name}</li>
             ))}
           </ul>
